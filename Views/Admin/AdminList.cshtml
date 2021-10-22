@@ -1,0 +1,57 @@
+﻿@model IEnumerable<EntityLayer.Concrete.Admin>
+
+@{
+    ViewBag.Title = "AdminList";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>AdminList</h2>
+
+<br />
+<table class="table table-bordered">
+    <tr>
+        <th>ID</th>
+        <th>Kullanıcı Adı</th>
+        <th>Şifre</th>
+        <th>Yetki</th>
+
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.AdminID</td>
+            <td>@item.UserName</td>
+            <td>@item.Password</td>
+            <td>@item.AdminRole</td>
+            <td><a href="/Admin/AdminEdit/@item.AdminID" class="btn btn-success">Güncelle</a></td>
+            <td><a href="/Admin/DeleteAdmin/@item.AdminID" class="btn btn-danger">Sil</a></td>
+        </tr>
+    }
+</table>
+<button class="btn btn-primary" data-toggle="modal" data-target="#Modal1">
+    Yeni Admin Ekle
+</button>
+<div class="modal" id="Modal1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Yeni Admin Ekleme Paneli</h2>
+            </div>
+            <form method="post" action="/Admin/AdminAdd/">
+                <div class="modal-body">
+                    <label>Admin Kullanıcı Adı</label>
+                    <input type="text" name="UserName" class="form-control" />
+                    <br />
+                    <label>Şifre</label>
+                    <input type="password" name="Password" class="form-control" />
+                    <br />
+                    <label>Yetki</label>
+                    <input type="text" name="AdminRole" class="form-control" />
+                    <br />
+                    <button class="btn btn-primary">Kaydet</button>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
